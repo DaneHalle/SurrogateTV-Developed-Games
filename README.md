@@ -14,3 +14,8 @@ BOTW was launched on Feburary 5th, 2021
 Zelda: Breath of the Wild for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to compelte a game together), I made BOTW. Determined to not have the same outcome as SurroBros, I spent the between time setting up quite a number of IR trigger points to mitigate and stop users from getting to unintended menues and settings. Being that I was already developing a ton of IR triggers, I decided to make the game a more interactive experience, instead of the score on the site being "Games Played", I would have the game regocnize key points and items and hand out points. This would make it a competative, yet collaborative experience. 
 
 This game is currently running and can be played at https://surrogate.tv/game/botw
+
+## Super Mario Odyssey 
+SMO has yet to be launched and will be part of the RePlay game catalogue
+
+Super Mario Odyssey for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to compelte a game together), I made SMO. Extending what I learned from BOTW, I was able to easily get frames of data that could be used as IR trigger poitns to mitigate and stop users from getting to unintended menues and settings. 
