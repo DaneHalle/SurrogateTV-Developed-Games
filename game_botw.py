@@ -26,8 +26,9 @@ POINTS_PER_GAME = 5
 # image rec
 SAVE_FRAMES = False
 SAVE_DIR_PATH = "./games/botw/imgs/"
-global save_individual_frame
+global save_individual_frame, allowReset
 save_individual_frame = False
+allowReset = True
 
 #reset pins
 GPIO.setmode(GPIO.BCM)
@@ -1272,13 +1273,18 @@ class right_throttle(Switch):
 
 class reset_trinkets(Switch):
     async def on(self, seat=0):
-        send_sig(nsg2_reset, ON)
-        send_sig(nsg3_reset, ON)
-        logging.info(f"\t{seat} | TRINKET_RESET down")
+        global allowReset
+        if allowReset:
+            send_sig(nsg2_reset, ON)
+            send_sig(nsg3_reset, ON)
+            await asyncio.sleep(0.5)
+            send_sig(nsg2_reset, OFF)
+            send_sig(nsg3_reset, OFF)
+            await asyncio.sleep(2)
+            allowReset = False
+            logging.info(f"\t{seat} | TRINKET_RESET down")
 
     async def off(self, seat=0):
-        send_sig(nsg2_reset, OFF)
-        send_sig(nsg3_reset, OFF)
         logging.info(f"\t...{seat} | TRINKET_RESET up")
 
 # ----------------------------------------------------
@@ -1531,9 +1537,8 @@ class BOTW_IR(Game):
         # create capture
         self.cap = await AsyncVideoCapture.create("/dev/video21")
 
-        global RESTRICTED
+        global LOCKED, RESTRICTED, allowReset
         RESTRICTED = False
-        global LOCKED
         LOCKED = False
 
         # Screen triggers
@@ -2014,6 +2019,8 @@ class BOTW_IR(Game):
                     gotten[pointTrigger] = False
 
             # generic
+            if i%100==0:
+                allowReset = True
             if (i % 100 == 0 and SAVE_FRAMES) or save_individual_frame:
                 # logging.info("100 frames checked")
                 cv2.imwrite(f"{SAVE_DIR_PATH}/{i}.jpg", frame)

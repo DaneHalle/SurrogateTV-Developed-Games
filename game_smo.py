@@ -28,8 +28,9 @@ OFF = 1
 # image rec
 SAVE_ALL_FRAMES = False
 SAVE_DIR_PATH = "./games/ninswitch/imgs"
-global save_individual_fame
+global save_individual_fame, allowReset
 save_individual_fame = False
+allowReset = True
 
 # ----------------------------------------------------
 
@@ -132,15 +133,14 @@ PLUS_MENU_INGAME = [
 ]
 
 MINUS_MENU_INGAME = [
-    ((79, 687), (202, 166, 0)),
-    ((309, 694), (255, 255, 255)),
-    ((498, 700), (255, 255, 255)),
-    ((733, 685), (199, 176, 2)),
-    ((925, 684), (196, 170, 0)),
-    ((1043, 688), (192, 160, 0)),
+    ((24, 71), (197, 169, 0)),
+    ((78, 687), (201, 163, 0)),
+    ((732, 684), (195, 172, 0)),
+    ((925, 683), (194, 172, 0)),
+    ((1042, 689), (196, 164, 1)),
     ((1149, 687), (216, 177, 12)),
-    ((22, 68), (197, 169, 0)),
-    ((336, 70), (252, 253, 255)),
+    ((195, 685), (255, 255, 255)),
+    ((514, 691), (255, 255, 255)),
 ]
 
 GAME_MAIN_MENU = [
@@ -157,27 +157,20 @@ GAME_MAIN_MENU = [
 ]
 
 CONTROLLER_DC_INPUT_NEEDED =  [
-    ((499, 260), (50, 80, 255)),
-    ((526, 248), (47, 85, 254)),
-    ((587, 261), (49, 82, 255)),
-    ((617, 248), (47, 85, 255)),
-    ((427, 88), (252, 252, 252)),
-    ((423, 56), (46, 93, 255)),
+    ((427, 87), (255, 253, 254)),
     ((571, 107), (254, 254, 254)),
-    ((572, 57), (47, 80, 255)),
-    ((658, 87), (250, 252, 247)),
-    ((700, 107), (254, 250, 247)),
-    ((701, 56), (46, 79, 255)),
-    ((655, 56), (51, 90, 255)),
+    ((658, 85), (232, 237, 233)),
+    ((698, 106), (237, 239, 234)),
     ((789, 80), (242, 255, 243)),
-    ((802, 96), (254, 255, 255)),
     ((830, 96), (254, 251, 255)),
-    ((842, 59), (53, 85, 230)),
-    ((788, 59), (52, 87, 253)),
-    ((589, 690), (246, 254, 255)),
-    ((652, 688), (252, 252, 250)),
-    ((1015, 678), (249, 249, 249)),
-    ((1067, 680), (255, 255, 253)),
+    ((529, 237), (47, 83, 255)),
+    ((586, 241), (47, 83, 255)),
+    ((617, 258), (41, 88, 254)),
+    ((499, 259), (48, 84, 255)),
+    ((540, 593), (185, 229, 255)),
+    ((568, 593), (185, 230, 253)),
+    ((597, 690), (251, 255, 252)),
+    ((1013, 689), (255, 255, 255)),
 ]
 
 CONTROLLER_DC_RECONNECTED = [
@@ -350,17 +343,20 @@ GOT_MULTI_MOON = [
     ((25, 67), (254, 34, 36)),
 ]
 
-
-
 # ----------------------------------------------------
 
 class reset_trinkets(Switch):
     async def on(self, seat=0):
-        pi.write(nsg_reset, ON)
-        logging.info(f"\t{seat} | TRINKET_RESET down")
+        global allowReset
+        if allowReset:
+            pi.write(nsg_reset, ON)
+            await asyncio.sleep(0.5)
+            pi.write(nsg_reset, OFF)
+            await asyncio.sleep(2)
+            allowReset = False
+            logging.info(f"\t{seat} | TRINKET_RESET down")
 
     async def off(self, seat=0):
-        pi.write(nsg_reset, OFF)
         logging.info(f"\t...{seat} | TRINKET_RESET up")
 
 # ----------------------------------------------------
@@ -468,7 +464,6 @@ class SMO_IR(Game):
 
     async def on_start(self):
         self.curUser = self.players
-        logging.info(self.players)
         player = json.loads(json.dumps(self.players))[0]['username']
 
         req = requests.get("https://g9b1fyald3.execute-api.eu-west-1.amazonaws.com/master/users?search="+str(player)).text
@@ -537,7 +532,7 @@ class SMO_IR(Game):
         # create capture
         self.cap = await AsyncVideoCapture.create("/dev/video21")
         
-        global LOCKED
+        global LOCKED, allowReset
         LOCKED = False
 
         # get detector
@@ -567,13 +562,14 @@ class SMO_IR(Game):
         z = 0
         async for frame in self.cap.frames():
             # detect
+            if i%30==0 and (controller_dc_reconnected(frame) or controller_dc_input_needed(frame) or controller_dc_reconnected(frame) or controller_dc_input_needed(frame)):
+                pi.write(nsg_reset, ON)
+                await asyncio.sleep(0.5)
+                pi.write(nsg_reset, OFF)
+                await asyncio.sleep(1)
             try:
                 if (controller_dc_reconnected(frame) or controller_dc_input_needed(frame)) and not DEBUG:
                     self.io.disable_input(0)
-                    pi.write(nsg_reset, ON)
-                    await asyncio.sleep(0.5)
-                    pi.write(nsg_reset, OFF)
-                    await asyncio.sleep(2)
                     self.nsg.press(NSButton.A)
                     await asyncio.sleep(0.1)
                     self.nsg.release(NSButton.A)
@@ -582,13 +578,9 @@ class SMO_IR(Game):
                     await asyncio.sleep(0.1)
                     self.nsg.release(NSButton.A)
                     await asyncio.sleep(2)
-                    self.io.enable_input(1)
+                    self.io.enable_input(0)
             except:
                 if (controller_dc_reconnected(frame) or controller_dc_input_needed(frame)) and not DEBUG:
-                    pi.write(nsg_reset, ON)
-                    await asyncio.sleep(0.5)
-                    pi.write(nsg_reset, OFF)
-                    await asyncio.sleep(2)
                     self.nsg.press(NSButton.A)
                     await asyncio.sleep(0.1)
                     self.nsg.release(NSButton.A)
@@ -637,8 +629,8 @@ class SMO_IR(Game):
                 self.prepare = True
 
             # generic
-            if i % 100 == 0:
-                logging.info("100 frames checked")
+            if i%100==0:
+                allowReset = True
             if SAVE_ALL_FRAMES or save_individual_fame:
                 cv2.imwrite(f"{SAVE_DIR_PATH}/{i}.jpg", frame)
                 logging.info(f"SAVED {i}.jpg")
