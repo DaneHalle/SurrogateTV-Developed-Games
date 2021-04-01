@@ -29,3 +29,10 @@ SMO was launched on March 19th, 2021 and is part of the RePlay game catalogue
 Super Mario Odyssey for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to compelte a game together), I made SMO. Extending what I learned from BOTW, I was able to easily get frames of data that could be used as IR trigger poitns to mitigate and stop users from getting to unintended menues and settings. 
 
 This game is currently running and can be played at https://surrogate.tv/game/replay
+
+## Minecraft
+Minecraft was launched on April 1st, 2021
+
+Minecraft for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Minecraft. I used the development of this game to work on a tutorial to help others easily make these style of games that are locked down and make sure that the player cannot mess with stuff they shouldn't be able to. This game was also made free to allow new and existing users a chance to check out the system if they hadn't before due to the small cost per play. 
+
+This game is currently running and can be played at https://surrogate.tv/game/minecraft
