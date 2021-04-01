@@ -18,8 +18,8 @@ import RPi.GPIO as GPIO
 import json
 import requests
 import telebot
-bot = telebot.TeleBot("1634580045:AAHKnC5QRjub--EJMV7UWsdi019-AW5u42I")
-chat_id = 1645773858
+bot = telebot.TeleBot("[REDACTED]")
+chat_id = [REDACTED]
 
 POINTS_PER_GAME = 5
 
@@ -1434,7 +1434,7 @@ class BOTW_IR(Game):
         # logging.info(self.players+"\n")
         self.curUser = self.players
         player = json.loads(json.dumps(self.players))[0]['username']
-        curPlayerRequest = requests.post("http://10.0.0.239:3030/player", json.loads('{"player": "'+player+'"}'))
+        curPlayerRequest = requests.post("[REDACTED]", json.loads('{"player": "'+player+'"}'))
         req = requests.get("https://g9b1fyald3.execute-api.eu-west-1.amazonaws.com/master/users?search="+str(player)).text
         uid = json.loads(req)['result'][0]['userId']
         if str(uid) in self.userIDs:
@@ -1475,7 +1475,7 @@ class BOTW_IR(Game):
             message = "{"+f"\"player\": \"{str(self.userIDs[self.knownIndex])}\",\"triggerid\": \"sys_gametime\", \"points\": {str(POINTS_PER_GAME)}, \"totalpoints\": {str(self.points)}"+"}"
             jsonmsg = json.loads(message)
             if self.knownIndex != 0:
-                response = requests.post("http://proco.me/data/botw/addlogentry.php", json.dumps(jsonmsg)).text
+                response = requests.post("[REDACTED]", json.dumps(jsonmsg)).text
 
         self.prepare = True
         self.knownIndex = 0
@@ -1507,7 +1507,7 @@ class BOTW_IR(Game):
         self.prepare = True
         self.knownIndex = 0
 
-        curPlayerRequest = requests.post("http://10.0.0.239:3030/player", json.loads('{"player": ""}'))
+        curPlayerRequest = requests.post("[REDACTED]", json.loads('{"player": ""}'))
 
         while self.prepare: 
             await asyncio.sleep(3)
@@ -1944,7 +1944,6 @@ class BOTW_IR(Game):
                     await asyncio.sleep(0.1)
                     self.usb_2.dPad(NSDPad.CENTERED)
                     await asyncio.sleep(2)
-                    self.io.disable_input(1)
                     self.usb_2.press(NSButton.A)
                     await asyncio.sleep(0.1)
                     self.usb_2.release(NSButton.A)
@@ -1961,7 +1960,6 @@ class BOTW_IR(Game):
                     await asyncio.sleep(0.1)
                     self.usb_2.dPad(NSDPad.CENTERED)
                     await asyncio.sleep(2)
-                    self.io.disable_input(1)
                     self.usb_2.press(NSButton.A)
                     await asyncio.sleep(0.1)
                     self.usb_2.release(NSButton.A)
@@ -2007,7 +2005,7 @@ class BOTW_IR(Game):
                         message = "{"+f"\"player\": \"{str(self.userIDs[self.knownIndex])}\",\"triggerid\": \"{str(triggerID[pointTrigger])}\", \"points\": {str(pointsToAdd[pointTrigger])}, \"totalpoints\": {str(self.points)}"+"}"
                         jsonmsg = json.loads(message)
                         if self.knownIndex != 0 or triggerID[pointTrigger] == "i_bad":
-                            response = requests.post("http://proco.me/data/botw/addlogentry.php", json.dumps(jsonmsg)).text
+                            response = requests.post("[REDACTED]", json.dumps(jsonmsg)).text
                         self.usb_2.press(NSButton.A)
                         await asyncio.sleep(0.1)
                         self.usb_2.release(NSButton.A)
