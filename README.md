@@ -36,3 +36,10 @@ Minecraft was launched on April 1st, 2021
 Minecraft for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Minecraft. I used the development of this game to work on a tutorial to help others easily make these style of games that are locked down and make sure that the player cannot mess with stuff they shouldn't be able to. This game was also made free to allow new and existing users a chance to check out the system if they hadn't before due to the small cost per play. 
 
 This game is currently running and can be played at https://surrogate.tv/game/minecraft
+
+## Skyrim
+Skyrim was launched on April 19th, 2021
+
+Skyrim for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Skyrim. Due tot he age rating of this game being PEGI 18, I had to find a way to allow users who were known to be over 18 to play as the site doesn't have a system in place to check that. Surrogate has a patreon system and I figured that all of those supporters would be over 18 due to the need for a payment method. I opened the game to them and supporters of my buymeacoffee. This game also proved a challenge in choosing proper parts of the UI for frames due to the use of white or transparent elements. 
+
+This game is currently running and can be played at https://surrogate.tv/game/skyrim
