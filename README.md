@@ -40,6 +40,13 @@ This game is currently running and can be played at https://surrogate.tv/game/mi
 ## Skyrim
 Skyrim was launched on April 19th, 2021
 
-Skyrim for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Skyrim. Due tot he age rating of this game being PEGI 18, I had to find a way to allow users who were known to be over 18 to play as the site doesn't have a system in place to check that. Surrogate has a patreon system and I figured that all of those supporters would be over 18 due to the need for a payment method. I opened the game to them and supporters of my buymeacoffee. This game also proved a challenge in choosing proper parts of the UI for frames due to the use of white or transparent elements. 
+Skyrim for the Switch was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Skyrim. Due to the age rating of this game being PEGI 18, I had to find a way to allow users who were known to be over 18 to play as the site doesn't have a system in place to check that. Surrogate has a patreon system and I figured that all of those supporters would be over 18 due to the need for a payment method. I opened the game to them and supporters of my buymeacoffee. This game also proved a challenge in choosing proper parts of the UI for frames due to the use of white or transparent elements. 
 
 This game is currently running and can be played at https://surrogate.tv/game/skyrim
+
+## Animal Crossing
+Animal Scrossing was launched on May 28th, 2021
+
+Animal Crossing: New Horizons was able to be played on the internet anywhere in the world. Using the site's WePlay Model (Users get increments of time to complete a game together), I made Animal Crossing. This was the easiest game to hook up for several reasons. During the development of Minecraft, I worked on making an effective tutorial for other users to utilize to make games. I used that tutorial process to streamline how easy it would be to get a game working effectively. This game also was already quite restictive on what a user could access so I did not need to have a lot of fancy IR trigger points, in all reality, I only have something like 5 points, most of which are safe guards to lock down the game should the user get to those screens. 
+
+This game is currently running and can be played at https://surrogate.tv/game/crossing
