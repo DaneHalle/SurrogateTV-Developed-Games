@@ -15,7 +15,7 @@ import json
 import requests
 import telebot
 bot = telebot.TeleBot("[REDACTED]")
-chat_id = 1645773858
+chat_id = [REDACTED]
 
 pigpio.exceptions = False
 pi = pigpio.pi()
