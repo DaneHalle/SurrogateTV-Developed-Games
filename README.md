@@ -1,5 +1,5 @@
 # SurrogateTV-Developed-Games
-Both game scripts I have developed for SurrogateTV. The site went dark October 2021 forcing me to bring the games offline as servers also went dark. 
+Both game scripts I have developed for SurrogateTV. **The site went dark November 2021 forcing me to bring the games offline as servers also went dark.**
 
 ## SurroBros
 SurroBros was launched on November 1st, 2020
